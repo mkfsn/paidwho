@@ -1,5 +1,10 @@
 import './welcome.scss';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { SheetData } from '../../services/sheet-data';
+
+import { UUID } from '../../model/misc';
+import { Sheet } from '../../model/sheet';
 
 declare var require: any;
 
@@ -9,21 +14,17 @@ declare var require: any;
 })
 export class WelcomeComponent {
 
-    private uuid: string;
+    private sheetId: string;
+    private sheet: Sheet;
 
-    constructor() {
-        this.uuid = this.guid()
+    constructor(private router: Router, private sheetData: SheetData) {
+        this.sheet = this.sheetData.get('test');
     }
 
-    private guid(): string {
-        let s4 = function(): string {
-            return Math.floor((1 + Math.random()) * 0x10000)
-                       .toString(16)
-                       .substring(1);
-        }
-        return s4() + s4() + '-' +
-            s4() + '-' + s4() + '-' + s4() + '-' +
-            s4() + s4() + s4();
+    private gotoSheet() {
+        this.router.navigate([
+            '/sheet/' + this.sheet.id
+        ]);
     }
 
 }

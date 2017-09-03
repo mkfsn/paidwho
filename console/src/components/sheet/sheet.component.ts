@@ -1,5 +1,8 @@
+import './sheet.scss';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { SheetData } from '../../services/sheet-data';
+import { Sheet } from '../../model/sheet';
 
 declare var require: any;
 
@@ -9,12 +12,11 @@ declare var require: any;
 })
 export class SheetComponent {
 
-    constructor(private route: ActivatedRoute) {
-        let channelId: string;
-        this.route.params.forEach((param: Params) => {
-            // param.id;
-            console.log('sheet id:', param.id);
-        });
+    private sheet: Sheet;
+
+    constructor(private route: ActivatedRoute, private sheetData: SheetData) {
+        this.sheet = sheetData.get(this.route.snapshot.url[1].path);
+        console.log(this.sheet);
     }
 
 }
