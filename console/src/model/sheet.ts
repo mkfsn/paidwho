@@ -7,6 +7,7 @@ export class Sheet {
     id: string;
     name: string;
     currency: string;
+    timestamp: Date;
 
     private members: Array<Person>;
     private records: Array<Record>;
@@ -17,6 +18,7 @@ export class Sheet {
         this.currency = '';
         this.members = [];
         this.records = [];
+        this.timestamp = new Date();
     }
 
     private findMember(name: string) {
@@ -30,6 +32,10 @@ export class Sheet {
         this.members.push(person);
     }
 
+    public getMembers(): Array<Person> {
+        return this.members;
+    }
+
     public removeMember(person: Person) {
         let index = this.members.indexOf(person);
         if (index !== -1) {
@@ -39,6 +45,10 @@ export class Sheet {
 
     public addRecord(record: Record) {
         this.records.push(record);
+    }
+
+    public getRecords(): Array<Record> {
+        return this.records;
     }
 
     public toJSON(): string {

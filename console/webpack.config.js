@@ -3,7 +3,7 @@ var webpack = require("webpack"),
 
 const ccpOptions = {
     name: 'vendor',
-    filename: './dist/vendor.bundle.js'
+    filename: 'vendor.bundle.js'
 };
 
 function root(__path) {
@@ -73,7 +73,7 @@ const config = {
             // The (\\|\/) piece accounts for path separators in *nix and Windows
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             root('./src'), // location of your src
-            { }
+            {}
         ),
 
         new webpack.LoaderOptionsPlugin({
