@@ -8,16 +8,33 @@ export class Sheet {
     name: string;
     currency: string;
 
-    private member: Array<Person>;
+    private members: Array<Person>;
     private records: Array<Record>;
 
     constructor(name: string) {
         this.id = UUID();
         this.name = name;
+        this.currency = '';
+        this.members = [];
+        this.records = [];
+    }
+
+    private findMember(name: string) {
+        return this.members.find((p: Person) => p.name === name);
     }
 
     public addMember(person: Person) {
-        this.member.push(person);
+        if (this.findMember(person.name) !== undefined) {
+            return;
+        }
+        this.members.push(person);
+    }
+
+    public removeMember(person: Person) {
+        let index = this.members.indexOf(person);
+        if (index !== -1) {
+            this.members.splice(index, 1);
+        }
     }
 
     public addRecord(record: Record) {
@@ -28,7 +45,7 @@ export class Sheet {
         return JSON.stringify({
             'id': this.id,
             'name': this.name,
-            'member': this.member,
+            'member': this.members,
             'currency': this.currency
         });
     }
