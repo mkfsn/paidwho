@@ -23,29 +23,42 @@ interface ISection {
 export class SheetComponent {
 
     private sheet: Sheet;
-    private sections: Array<ISection> = [];
+    private sections: Array<ISection>;
+    private placeholders: Object;
+    private today: Date;
 
     @ViewChild('memberModal') public memberModal: ModalDirective;
 
     constructor(private route: ActivatedRoute, private sheetData: SheetData) {
-        this.sheet = sheetData.get(this.route.snapshot.url[1].path);
+        this.today = new Date();
+        this.sections = [];
+        this.getSheet();
+    }
+
+    private getSheet() {
+        this.sheet = this.sheetData.get(this.route.snapshot.url[1].path);
         console.log('sheet', this.sheet);
 
         let records = this.sheet.getRecords();
+        let dict = {};
         records.forEach((r: Record) => {
-            let date = new Date(r.date.getFullYear(), r.date.getMonth(), r.date.getDay());
-            let index = this.sections.findIndex((v) => v.date === date);
-            if (index === -1) {
+            let dateString = r.date.getFullYear() + '/' + r.date.getMonth() + '/' + r.date.getDay();
+            let date = new Date(dateString);
+
+            let index: number;
+            if (dateString in dict) {
+                index = dict[dateString];
+            } else {
+                index = this.sections.length;
                 this.sections.push({
                     date: date,
                     records: []
                 });
-                index = this.sections.length - 1;
             }
             this.sections[index].records.push(r);
         });
 
-        console.log(this.sections);
+        console.log('sections', this.sections);
     }
 
     private addMember(name: string): void {

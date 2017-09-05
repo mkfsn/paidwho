@@ -14,7 +14,6 @@ export class Record {
     amount: number;
     title: string;
 
-    people: Array<Person>;
     details: Array<DetailRecord>;
 
     constructor(title: string, date: Date, amount: number, payer: Person) {
@@ -23,5 +22,7 @@ export class Record {
         this.amount = amount;
         this.payer = payer;
         this.timestamp = new Date();
+
+        this.details = [];
     }
 }

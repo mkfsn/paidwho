@@ -1,11 +1,50 @@
-.page-header {
+.title.page-header {
     margin-top: 0;
 
-    .page-header-left h3 {
-        margin-top: 0;
+    .page-header-left {
+        padding: 0;
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 33px;
+        }
     }
 
     .page-header-right {
+        padding: 0;
         text-align: right;
+    }
+}
+
+.control {
+    .panel-body {
+        form.form-horizontal {
+            .form-group {
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+.modal {
+    .modal-body {
+        .add-member {
+            .input-group-btn {
+                button.btn {
+                    height: 34px;
+                }
+            }
+        }
+        .list-member {
+            .list-group-item {
+                button.btn.btn-xs {
+                    float: right;
+                    font-size: 11px;
+                    padding: 0 5px;
+                }
+            }
+        }
     }
 }

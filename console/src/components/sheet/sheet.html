@@ -1,21 +1,94 @@
 <div class="container">
 
     <!-- Title -->
-    <div class="page-header">
-        <div class="page-header-left col-xs-6">
+    <div class="page-header title">
+        <div class="page-header-left col-xs-10">
             <h3>{{ sheet.name }}</h3>
         </div>
-        <div class="page-header-right col-xs-6">
-            <button class="btn btn-default" (click)="memberModal.show()">
-                <i class="fa fa-users" aria-hidden="true"></i> Member
+        <div class="page-header-right col-xs-2">
+            <button class="btn btn-info" (click)="memberModal.show()">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span class="hidden-xs">Member</span>
             </button>
         </div>
         <div class="clearfix"></div>
     </div>
 
+    <!-- Control -->
+    <div class="panel panel-primary control">
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                            <input type="date" class="form-control"
+                                   style="padding-top: 0px; -webkit-appearance: none; -moz-appearance: none;"
+                                   id="record-date" [ngModel]="today | date:'yyyy-MM-dd'"
+                                   [ngModelOptions]="{standalone: true}"
+                                   [value]="today | date:'yyyy-MM-dd'">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-leaf"></i>
+                            </span>
+                            <input type="text" class="form-control" id="record-title" placeholder="Title">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <select class="form-control" id="record-payer">
+                                <option disabled style="display:none;"></option>
+                                <option *ngFor="let person of sheet.members">{{ person.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-usd"></i>
+                            </span>
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" class="form-control" id="record-amount" placeholder="Amount">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                           <span class="input-group-addon">
+                                <i class="fa fa-users"></i>
+                            </span>
+                            <select multiple class="form-control" id="record-people">
+                                <option *ngFor="let person of sheet.members">{{ person.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Body -->
     <section *ngFor="let section of sections">
-        <div class="panel panel-primary">
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ section.date }}</h3>
             </div>
@@ -28,8 +101,9 @@
             </div>
         </div>
     </section>
-</div>
 
+</div>
+<!-- modal -->
 <div class="modal" bsModal #memberModal="bs-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -40,21 +114,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div>
+                <div class="add-member">
                     <div class="form-group">
-                        <input type="text" #name class="form-control" placeholder="Name">
+                        <div class="input-group">
+                            <input type="text" #name class="form-control" placeholder="Name">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary"
+                                        (click)="addMember(name.value); name.value=''; name.focus()">
+                                    <i class="fa fa-plus"></i> Add
+                                </button>
+                            </span>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary"
-                            (click)="addMember(name.value); name.value=''; name.focus()">
-                        <i class="fa fa-plus"></i> Add
-                    </button>
                 </div>
                 <hr/>
-                <div>
+                <div class="list-member">
                     <div class="list-group">
                         <div class="list-group-item" *ngFor="let member of sheet.members">
-                            <span>{{ member.name }}</span>
-                             <button class="btn btn-danger" (click)="removeMember(member)">Remove</button>
+                            <span>
+                                <i class="glyphicon glyphicon-user"></i>
+                                {{ member.name }}
+                            </span>
+                             <button class="btn btn-danger btn-xs" (click)="removeMember(member)">
+                                 <i class="glyphicon glyphicon-trash"></i>
+                                 Remove
+                             </button>
                         </div>
                     </div>
                 </div>
