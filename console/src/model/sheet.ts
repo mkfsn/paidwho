@@ -8,9 +8,8 @@ export class Sheet {
     name: string;
     currency: string;
     timestamp: Date;
-
-    private members: Array<Person>;
-    private records: Array<Record>;
+    members: Array<Person>;
+    records: Array<Record>;
 
     constructor(name: string) {
         this.id = UUID();

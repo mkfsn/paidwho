@@ -14,17 +14,23 @@ declare var require: any;
 })
 export class WelcomeComponent {
 
-    private sheetId: string;
-    private sheet: Sheet;
+    private name: string;
 
     constructor(private router: Router, private sheetData: SheetData) {
-        this.sheet = this.sheetData.get('test');
     }
 
     private gotoSheet() {
-        this.router.navigate([
-            '/sheet/' + this.sheet.id
-        ]);
+        let sheet = new Sheet(this.name);
+        this.sheetData.set(sheet).subscribe(
+            () => {
+                this.router.navigate([
+                    '/sheet/' + sheet.id
+                ]);
+            },
+            () => {
+                // error
+            }
+        )
     }
 
 }

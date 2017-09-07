@@ -1,6 +1,6 @@
 import './sheet.scss';
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -29,36 +29,55 @@ export class SheetComponent {
 
     @ViewChild('memberModal') public memberModal: ModalDirective;
 
-    constructor(private route: ActivatedRoute, private sheetData: SheetData) {
+    constructor(private router: Router, private route: ActivatedRoute, private sheetData: SheetData) {
         this.today = new Date();
         this.sections = [];
         this.getSheet();
     }
 
     private getSheet() {
-        this.sheet = this.sheetData.get(this.route.snapshot.url[1].path);
-        console.log('sheet', this.sheet);
+        this.sheetData.get(this.route.snapshot.url[1].path).subscribe(
+            (data: Sheet) => {
+                if (data === null) {
+                    this.router.navigate([
+                        '/'
+                    ]);
+                    return;
+                }
 
-        let records = this.sheet.getRecords();
-        let dict = {};
-        records.forEach((r: Record) => {
-            let dateString = r.date.getFullYear() + '/' + r.date.getMonth() + '/' + r.date.getDay();
-            let date = new Date(dateString);
+                this.sheet = new Sheet(data.name);
+                this.sheet.id = data.id;
+                this.sheet.members = data.members;
+                this.sheet.records = data.records;
+                this.sheet.currency = data.currency;
 
-            let index: number;
-            if (dateString in dict) {
-                index = dict[dateString];
-            } else {
-                index = this.sections.length;
-                this.sections.push({
-                    date: date,
-                    records: []
+                console.log('sheet', this.sheet);
+
+                let records = this.sheet.getRecords();
+                let dict = {};
+                records.forEach((r: Record) => {
+                    let dateString = r.date.getFullYear() + '/' + r.date.getMonth() + '/' + r.date.getDay();
+                    let date = new Date(dateString);
+
+                    let index: number;
+                    if (dateString in dict) {
+                        index = dict[dateString];
+                    } else {
+                        index = this.sections.length;
+                        this.sections.push({
+                            date: date,
+                            records: []
+                        });
+                    }
+                    this.sections[index].records.push(r);
                 });
-            }
-            this.sections[index].records.push(r);
-        });
 
-        console.log('sections', this.sections);
+                console.log('sections', this.sections);
+            },
+            () => {
+
+            }
+        );
     }
 
     private addMember(name: string): void {
@@ -67,10 +86,19 @@ export class SheetComponent {
         }
         let member = new Person(name);
         this.sheet.addMember(member);
+        this.sheetData.set(this.sheet).subscribe(
+            () => {
+                console.log('success', this.sheet);
+            },
+            () => {
+                console.log('error');
+            }
+        );
     }
 
     private removeMember(person: Person): void {
         this.sheet.removeMember(person);
+        this.sheetData.set(this.sheet);
     }
 
 }
