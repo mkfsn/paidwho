@@ -1,12 +1,18 @@
+import { Injectable } from '@angular/core';
+
+import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { Observable } from 'rxjs'
+
 import { Sheet } from '../model/sheet';
 import { Person } from '../model/person';
 import { Record } from '../model/record';
 
+@Injectable()
 export class SheetData {
 
     private sheet: Sheet;
 
-    constructor() {
+    constructor(private storage: AsyncLocalStorage) {
         this.sheet = new Sheet('Travel to Hokkaido!');
 
         let foo: Person = new Person('foo');
@@ -21,8 +27,13 @@ export class SheetData {
         this.sheet.addRecord(lunch);
     }
 
-    public get(id: string): Sheet {
-        return this.sheet;
+    public get(id: string): Observable<any> {
+        return this.storage.getItem(id);
     }
+
+    public set(sheet: Sheet): Observable<any> {
+        return this.storage.setItem(sheet.id, sheet);
+    }
+
 
 }

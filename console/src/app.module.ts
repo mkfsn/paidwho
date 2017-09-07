@@ -3,7 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+// Third party
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
 
 // Module
 import { RouteModule } from './route.module';
@@ -18,6 +20,7 @@ import { SheetData } from './services/sheet-data';
 
 @NgModule({
     imports: [
+        AsyncLocalStorageModule,
         BrowserModule,
         CommonModule,
         FormsModule,
