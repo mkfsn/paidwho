@@ -9,7 +9,10 @@ declare var require: any;
 })
 export class AppComponent {
 
+    private year: number;
+
     constructor() {
+        this.year = (new Date()).getFullYear();
     }
 
 }

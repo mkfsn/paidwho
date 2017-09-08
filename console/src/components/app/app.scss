@@ -1,18 +1,16 @@
 @import "~/node_modules/font-awesome/css/font-awesome.min.css";
 
-#get-start {
-    .jumbotron {
-
+header#app-header {
+    nav.navbar.navbar-default {
         margin-bottom: 0;
-
-        input#name {
-            display: inline-block;
-            width: auto;
-            vertical-align: bottom;
-        }
     }
 }
 
-footer {
-    height: 6em;
+footer#app-footer {
+    background-color: #f3f3f3;
+    padding-top: 1rem;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    text-align: center;
+    height: 6rem;
 }
