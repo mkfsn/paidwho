@@ -1,31 +1,29 @@
-<div class="container">
-
+<section class="container title">
     <!-- Title -->
-    <div class="page-header title">
-        <div class="page-header-left col-xs-10">
-            <h3>{{ sheet?.name }}</h3>
-        </div>
-        <div class="page-header-right col-xs-2">
-            <button class="btn btn-info" (click)="memberModal.show()">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                <span class="hidden-xs">Member</span>
-            </button>
-        </div>
-        <div class="clearfix"></div>
+    <div class="page-header-left col-xs-10">
+        <h3>{{ sheet?.name }}</h3>
     </div>
+    <div class="page-header-right col-xs-2">
+        <button class="btn btn-info" (click)="memberModal.show()">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span class="hidden-xs">Member</span>
+        </button>
+    </div>
+    <div class="clearfix"></div>
+</section>
 
+<section class="container control">
     <!-- Control -->
-    <div class="panel panel-primary control">
+    <div class="panel panel-primary">
         <div class="panel-body">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12 date">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </span>
                             <input type="date" class="form-control"
-                                   style="padding-top: 0px; -webkit-appearance: none; -moz-appearance: none;"
                                    id="record-date" [ngModel]="today | date:'yyyy-MM-dd'"
                                    [ngModelOptions]="{standalone: true}"
                                    [value]="today | date:'yyyy-MM-dd'">
@@ -33,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-leaf"></i>
@@ -43,7 +41,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-xs-6 payer">
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
@@ -56,9 +54,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
+                    <div class="col-xs-6 amount">
                         <div class="input-group">
                            <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-usd"></i>
@@ -68,11 +64,20 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="input-group">
-                           <span class="input-group-addon">
-                                <i class="fa fa-users"></i>
-                            </span>
+                    <div class="col-xs-12 people">
+                        <div class="people-header clearfix">
+                            <div class="col-xs-6 left">
+                                <i class="fa fa-users"></i> People
+                            </div>
+                            <div class="col-xs-6 right">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Equally
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="people-body">
                             <select multiple class="form-control" id="record-people">
                                 <ng-container *ngIf="sheet">
                                     <option *ngFor="let person of sheet.members">{{ person.name }}</option>
@@ -89,9 +94,11 @@
             </form>
         </div>
     </div>
+</section>
 
+<section class="container">
     <!-- Body -->
-    <section *ngFor="let section of sections">
+    <div *ngFor="let section of sections">
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ section.date }}</h3>
@@ -104,54 +111,55 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-</div>
-<!-- modal -->
-<div class="modal" bsModal #memberModal="bs-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title pull-left">Members</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="memberModal.hide()">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="add-member">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" #name class="form-control" placeholder="Name">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-primary"
-                                        (click)="addMember(name.value); name.value=''; name.focus()">
-                                    <i class="fa fa-plus"></i> Add
-                                </button>
-                            </span>
+<section class="model">
+    <!-- modal -->
+    <div class="modal" bsModal #memberModal="bs-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title pull-left">Members</h4>
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="memberModal.hide()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="add-member">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" #name class="form-control" placeholder="Name">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"
+                                            (click)="addMember(name.value); name.value=''; name.focus()">
+                                        <i class="fa fa-plus"></i> Add
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="list-member">
+                        <div class="list-group" *ngIf="sheet">
+                            <div class="list-group-item" *ngFor="let member of sheet.members">
+                                <span>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    {{ member.name }}
+                                </span>
+                                 <button class="btn btn-danger btn-xs" (click)="removeMember(member)">
+                                     <i class="glyphicon glyphicon-trash"></i>
+                                     Remove
+                                 </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <hr/>
-                <div class="list-member">
-                    <div class="list-group" *ngIf="sheet">
-                        <div class="list-group-item" *ngFor="let member of sheet.members">
-                            <span>
-                                <i class="glyphicon glyphicon-user"></i>
-                                {{ member.name }}
-                            </span>
-                             <button class="btn btn-danger btn-xs" (click)="removeMember(member)">
-                                 <i class="glyphicon glyphicon-trash"></i>
-                                 Remove
-                             </button>
-                        </div>
-                    </div>
+                <!--
+                <div class="modal-footer">
                 </div>
+                -->
             </div>
-            <!--
-            <div class="modal-footer">
-            </div>
-            -->
         </div>
     </div>
-</div>
-
+</section>
