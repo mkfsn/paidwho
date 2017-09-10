@@ -135,26 +135,22 @@
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div class="list-member">
-                        <div class="list-group" *ngIf="sheet">
-                            <div class="list-group-item" *ngFor="let member of sheet.members">
-                                <span>
-                                    <i class="glyphicon glyphicon-user"></i>
-                                    {{ member.name }}
-                                </span>
-                                 <button class="btn btn-danger btn-xs" (click)="removeMember(member)">
-                                     <i class="glyphicon glyphicon-trash"></i>
-                                     Remove
-                                 </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <!--
                 <div class="modal-footer">
+                    <ng-container *ngIf="sheet">
+                        <div class="member-list" *ngFor="let member of sheet.members">
+                            <span class="member-column member-icon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <span class="member-column member-name">{{ member.name }}</span>
+                            <span class="member-column member-remove">
+                                <button class="btn btn-danger btn-xs" (click)="removeMember(member)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </ng-container>
                 </div>
-                -->
             </div>
         </div>
     </div>

@@ -101,20 +101,60 @@ section.control {
 
 .modal {
     .modal-body {
+        background-color: #EEEEEE;
         .add-member {
+            .form-group {
+                margin-bottom: 0;
+            }
             .input-group-btn {
                 button.btn {
                     height: 34px;
                 }
             }
         }
-        .list-member {
-            .list-group-item {
-                button.btn.btn-xs {
-                    float: right;
-                    font-size: 11px;
-                    padding: 0 5px;
+    }
+    .modal-footer {
+
+        padding: 0;
+        padding-bottom: 15px;
+        max-height: calc(100vh - 142px);
+        overflow-y: scroll;
+
+        .member-list {
+
+            padding: 2px 15px;
+            line-height: 3rem;
+            vertical-align: middle;
+            padding-top: 8px;
+            min-height: 34px;
+            border-bottom: 1px #EEEEEE solid;
+            padding-bottom: 8px;
+
+            .member-column {
+                display: table-cell;
+                vertical-align: middle;
+
+                &.member-name {
+                    width: 100%;
+                    padding-left: .5rem;
+                    padding-right: .5rem;
+                    text-align: left;
+                    line-height: 2rem;
                 }
+
+                &.member-remove {
+                    @media (min-width: 500px) {
+                        button.btn-danger:after {
+                            content: "Remove";
+                        }
+                    }
+                }
+            }
+
+            button.btn.btn-xs {
+                float: right;
+                font-size: 11px;
+                padding: 0 5px;
             }
         }
     }
