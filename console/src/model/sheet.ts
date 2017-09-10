@@ -7,10 +7,10 @@ export class Sheet {
     id: string;
     name: string;
     currency: string;
-    createdAt: Date;
-    modifiedAt: Date;
     members: Array<Person>;
     records: Array<Record>;
+    createdAt: Date;
+    modifiedAt: Date;
 
     static fromObject(data: Object): Sheet {
         if (data === undefined) {
@@ -21,7 +21,7 @@ export class Sheet {
 
         let sheet = new Sheet(data['name']);
         sheet.id = data['id'];
-        sheet.currency = data['currency'];
+        sheet.currency = data['currency'] || '';
         sheet.records = data['records'] || [];
         sheet.members = data['members'] || [];
         sheet.createdAt = data['createdAt'];

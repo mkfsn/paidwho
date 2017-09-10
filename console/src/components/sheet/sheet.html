@@ -1,7 +1,22 @@
 <section class="container title">
     <!-- Title -->
     <div class="page-header-left col-xs-10">
-        <h3>{{ sheet?.name }}</h3>
+        <ng-container *ngIf="!editTitle">
+            <h3>
+                {{ sheet?.name }}
+                <small>
+                    <i class="glyphicon glyphicon-pencil"
+                       (click)="editTitle = !editTitle">
+                    </i>
+                </small>
+            </h3>
+        </ng-container>
+        <ng-container *ngIf="editTitle && sheet">
+            <input class="form-control"
+                   id="sheet-name" autofocus
+                   (blur)="editTitle = !editTitle"
+                   [(ngModel)]="sheet.name">
+        </ng-container>
     </div>
     <div class="page-header-right col-xs-2">
         <button class="btn btn-info" (click)="memberModal.show()">
