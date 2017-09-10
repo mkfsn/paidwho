@@ -1,20 +1,22 @@
 <section class="container title">
     <!-- Title -->
     <div class="page-header-left col-xs-10">
-        <ng-container *ngIf="!editTitle">
+        <ng-container *ngIf="!titleEditing">
             <h3>
                 {{ sheet?.name }}
                 <small>
                     <i class="glyphicon glyphicon-pencil"
-                       (click)="editTitle = !editTitle">
+                       (click)="setTitleEditing(true)">
                     </i>
                 </small>
             </h3>
         </ng-container>
-        <ng-container *ngIf="editTitle && sheet">
+        <ng-container *ngIf="titleEditing && sheet">
             <input class="form-control"
-                   id="sheet-name" autofocus
-                   (blur)="editTitle = !editTitle"
+                   #titleInput
+                   id="sheet-name"
+                   (blur)="setTitleEditing(false)"
+                   (keyup.enter)="setTitleEditing(false)"
                    [(ngModel)]="sheet.name">
         </ng-container>
     </div>
@@ -85,7 +87,7 @@
                     <div class="col-xs-6 right">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> Equally
+                                <input type="checkbox" tabindex="-1"> Equally
                             </label>
                         </div>
                     </div>
@@ -93,10 +95,10 @@
                 <div class="people-body">
                     <ng-container *ngIf="sheet">
                         <div class="record-people">
-                            <p class="record-people-row" *ngFor="let person of sheet.members; let i = index">
+                            <div class="record-people-row" *ngFor="let person of sheet.members; let i = index">
                                 <input type="checkbox" checked="checked" id="{{ 'record-people-' + i }}">
                                 <label for="{{ 'record-people-' + i }}">{{ person.name }}</label>
-                            </p>
+                            </div>
                         </div>
                     </ng-container>
                 </div>

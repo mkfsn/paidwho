@@ -1,5 +1,5 @@
 import './sheet.scss';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -18,12 +18,15 @@ export class SheetComponent {
 
     private sheet: Sheet;
     private today: Date;
+    private titleEditing: Boolean;
 
-    @ViewChild('memberModal') public memberModal: ModalDirective;
+    @ViewChild('memberModal') private memberModal: ModalDirective;
+    @ViewChild('titleInput') private titleInput: ElementRef;
 
     constructor(private router: Router, private route: ActivatedRoute, private sheetData: SheetData) {
         this.today = new Date();
         this.getSheet();
+        this.titleEditing = false;
     }
 
     private getSheet() {
@@ -64,7 +67,36 @@ export class SheetComponent {
 
     private removeMember(person: Person): void {
         this.sheet.removeMember(person);
-        this.sheetData.set(this.sheet);
+        this.sheetData.set(this.sheet).subscribe(
+            () => {
+                console.log('success');
+            },
+            () => {
+                console.log('error');
+            }
+        );
+    }
+
+    private setTitleEditing(editing: Boolean) {
+        if (editing == this.titleEditing) {
+            // Not changed
+            return;
+        }
+        this.titleEditing = editing;
+        if (this.titleEditing) {
+            setTimeout(() => {
+                this.titleInput.nativeElement.focus();
+            }, 0)
+        } else {
+            this.sheetData.set(this.sheet).subscribe(
+                () => {
+                    console.log('success');
+                },
+                () => {
+                    console.log('error');
+                }
+            );
+        }
     }
 
 }
