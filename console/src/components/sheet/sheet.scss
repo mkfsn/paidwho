@@ -82,9 +82,22 @@ section.control {
                 }
 
                 .people-body {
-                    select {
+                    .record-people {
+                        padding: 5px;
+                        max-height: calc(100vh - 390px);
+                        overflow-y: scroll;
+                        background-color: white;
+                        border-radius: 5px;
+                        border: 1px solid #ccc;
                         border-top-right-radius: 0;
                         border-top-left-radius: 0;
+
+                        .record-people-row {
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                        }
+
                     }
                 }
             }

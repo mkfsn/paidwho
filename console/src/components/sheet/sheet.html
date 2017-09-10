@@ -91,11 +91,14 @@
                     </div>
                 </div>
                 <div class="people-body">
-                    <select multiple class="form-control" id="record-people">
-                        <ng-container *ngIf="sheet">
-                            <option *ngFor="let person of sheet.members">{{ person.name }}</option>
-                        </ng-container>
-                    </select>
+                    <ng-container *ngIf="sheet">
+                        <div class="record-people">
+                            <p class="record-people-row" *ngFor="let person of sheet.members; let i = index">
+                                <input type="checkbox" checked="checked" id="{{ 'record-people-' + i }}">
+                                <label for="{{ 'record-people-' + i }}">{{ person.name }}</label>
+                            </p>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </div>
