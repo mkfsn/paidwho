@@ -37,25 +37,18 @@ export class SheetComponent {
 
     private getSheet() {
         this.sheetData.get(this.route.snapshot.url[1].path).subscribe(
-            (data: Sheet) => {
-                if (data === null) {
+            (sheet: Sheet) => {
+                if (sheet === null) {
                     this.router.navigate([
                         '/'
                     ]);
                     return;
                 }
-
-                this.sheet = new Sheet(data.name);
-                this.sheet.id = data.id;
-                this.sheet.members = data.members;
-                this.sheet.records = data.records;
-                this.sheet.currency = data.currency;
-
+                this.sheet = sheet;
                 console.log('sheet', this.sheet);
 
-                let records = this.sheet.getRecords();
                 let dict = {};
-                records.forEach((r: Record) => {
+                this.sheet.records.forEach((r: Record) => {
                     let dateString = r.date.getFullYear() + '/' + r.date.getMonth() + '/' + r.date.getDay();
                     let date = new Date(dateString);
 
@@ -74,9 +67,7 @@ export class SheetComponent {
 
                 console.log('sections', this.sections);
             },
-            () => {
-
-            }
+            () => { /* Won't called */ }
         );
     }
 

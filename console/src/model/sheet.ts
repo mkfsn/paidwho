@@ -7,9 +7,27 @@ export class Sheet {
     id: string;
     name: string;
     currency: string;
-    timestamp: Date;
+    createdAt: Date;
+    modifiedAt: Date;
     members: Array<Person>;
     records: Array<Record>;
+
+    static fromObject(data: Object): Sheet {
+        if (data === undefined) {
+            return undefined;
+        } else if (data === null) {
+            return null;
+        }
+
+        let sheet = new Sheet(data['name']);
+        sheet.id = data['id'];
+        sheet.currency = data['currency'];
+        sheet.records = data['records'] || [];
+        sheet.members = data['members'] || [];
+        sheet.createdAt = data['createdAt'];
+        sheet.modifiedAt = data['modifiedAt'];
+        return sheet;
+    }
 
     constructor(name: string) {
         this.id = UUID();
@@ -17,7 +35,7 @@ export class Sheet {
         this.currency = '';
         this.members = [];
         this.records = [];
-        this.timestamp = new Date();
+        this.createdAt = new Date();
     }
 
     private findMember(name: string) {
@@ -55,8 +73,9 @@ export class Sheet {
             'id': this.id,
             'name': this.name,
             'member': this.members,
-            'currency': this.currency
+            'currency': this.currency,
+            'createdAt': this.createdAt,
+            'modifiedAt': this.modifiedAt
         });
     }
-
 }
