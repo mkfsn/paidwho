@@ -110,22 +110,8 @@
     </form>
 </section>
 
-<section class="container">
-    <!-- Body -->
-    <div *ngFor="let section of sections">
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ section.date }}</h3>
-            </div>
-            <div class="panel-body">
-                <div *ngFor="let record of section.records">
-                    <p>{{ record.title }}</p>
-                    <p>{{ record.amount }}</p>
-                    <p>{{ record.payer.name }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<section class="container records" *ngIf="sheet">
+    <record-list [records]="sheet.records"></record-list>
 </section>
 
 <section class="model">

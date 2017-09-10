@@ -1,0 +1,14 @@
+<div *ngFor="let group of recordGroups">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ section.date | date:'yyyy-MM-dd' }}</h3>
+        </div>
+        <div class="panel-body">
+            <div *ngFor="let record of group.records">
+                <p>{{ record.title }}</p>
+                <p>{{ record.amount }}</p>
+                <p>{{ record.payer.name }}</p>
+            </div>
+        </div>
+    </div>
+</div>
