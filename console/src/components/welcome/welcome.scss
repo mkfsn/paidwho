@@ -1,1 +1,29 @@
+#get-start {
+    .starting-now {
+        height: calc(100vh - 152px);
+        background-color: #e2f5ff;
+        margin-top: 20px;
+        display: flex;
+
+        .board-wrapper {
+            display: flex;
+            align-items: center;
+
+            .board {
+                width: 100%;
+                align-items: center;
+
+                h1 {
+                    // fixed height
+                    margin-top: 0;
+                }
+
+                .input-group button {
+                    // fixed height
+                    height: 34px;
+                }
+            }
+        }
+    }
+}
 
