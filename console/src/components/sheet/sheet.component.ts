@@ -78,7 +78,7 @@ export class SheetComponent {
     }
 
     private setTitleEditing(editing: Boolean) {
-        if (editing == this.titleEditing) {
+        if (editing === this.titleEditing) {
             // Not changed
             return;
         }

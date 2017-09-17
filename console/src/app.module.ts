@@ -12,6 +12,8 @@ import { RouteModule } from './route.module';
 
 // Component
 import { AppComponent } from './components/app/app.component';
+import { ControlComponent } from './components/control/control.component';
+import { SelectorComponent } from './components/control/selector.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 import { RecordListComponent } from './components/record/record-list.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -30,7 +32,9 @@ import { SheetData } from './services/sheet-data';
     ],
     declarations: [
         AppComponent,
+        ControlComponent,
         RecordListComponent,
+        SelectorComponent,
         SheetComponent,
         WelcomeComponent
     ],
