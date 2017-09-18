@@ -17,14 +17,14 @@ declare var require: any;
 export class SheetComponent {
 
     private sheet: Sheet;
-    private today: Date;
+
     private titleEditing: Boolean;
 
     @ViewChild('memberModal') private memberModal: ModalDirective;
     @ViewChild('titleInput') private titleInput: ElementRef;
 
     constructor(private router: Router, private route: ActivatedRoute, private sheetData: SheetData) {
-        this.today = new Date();
+
         this.getSheet();
         this.titleEditing = false;
     }

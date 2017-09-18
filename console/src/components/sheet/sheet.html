@@ -30,7 +30,7 @@
 </section>
 
 <!-- Control -->
-<control></control>
+<control [members]="sheet?.members"></control>
 
 <section class="container records" *ngIf="sheet">
     <record-list [records]="sheet.records"></record-list>
