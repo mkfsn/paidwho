@@ -1,22 +1,45 @@
-<div class="people-header clearfix">
-    <div class="col-xs-6 left">
-        <i class="fa fa-users"></i> People
-    </div>
-    <div class="col-xs-6 right">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" tabindex="-1"> Equally
-            </label>
+<div class="people-selector">
+    <div class="people-header clearfix">
+        <div class="col-xs-6 left">
+            <i class="fa fa-users"></i> People
         </div>
-    </div>
-</div>
-<div class="people-body">
-    <ng-container *ngIf="sheet">
-        <div class="record-people">
-            <div class="record-people-row" *ngFor="let person of sheet.members; let i = index">
-                <input type="checkbox" checked="checked" id="{{ 'record-people-' + i }}">
-                <label for="{{ 'record-people-' + i }}">{{ person.name }}</label>
+        <div class="col-xs-6 right">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                           [(ngModel)]="equally"
+                           (change)="splitPaymentEqually()" tabindex="-1"> Equally
+                </label>
             </div>
         </div>
-    </ng-container>
+    </div>
+    <div class="people-body">
+        <div class="record-people">
+            <!-- selected -->
+            <div class="record-people-row" *ngFor="let s of selected; let i = index">
+                <input type="checkbox" tabindex="-1" checked="checked" (change)="deselect(s.person)" id="{{ 'record-people-' + i }}">
+                <input type="number"
+                       name="{{ 'person-expected-' + i }}"
+                       [(ngModel)]="s.expected"
+                       inputmode="numeric"
+                       pattern="[0-9]*"
+                       (change)="updateTotal()"
+                       class="input-sm form-control record-people-amount"
+                       placeholder="Amount">
+                <label for="{{ 'record-people-' + i }}">{{ s.person.name }}</label>
+            </div>
+            <!-- unselected -->
+            <div class="record-people-row" *ngFor="let s of unselected; let i = index">
+                <input type="checkbox" tabindex="-1" (change)="select(s.person)" id="{{ 'record-people-' + i }}">
+                <input type="number"
+                       name="{{ 'person-expected-' + i }}"
+                       [(ngModel)]="s.expected"
+                       inputmode="numeric"
+                       pattern="[0-9]*"
+                       class="input-sm form-control record-people-amount"
+                       placeholder="Amount">
+                <label for="{{ 'record-people-' + i }}">{{ s.person.name }}</label>
+            </div>
+        </div>
+    </div>
 </div>

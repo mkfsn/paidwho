@@ -7,6 +7,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { SheetData } from '../../services/sheet-data';
 import { Sheet } from '../../model/sheet';
 import { Person } from '../../model/person';
+import { Record } from '../../model/record';
 
 declare var require: any;
 
@@ -49,12 +50,7 @@ export class SheetComponent {
         console.log('sheet', this.sheet);
     }
 
-    private addMember(name: string): void {
-        if (name.trim() === '') {
-            return;
-        }
-        let member = new Person(name);
-        this.sheet.addMember(member);
+    private saveSheet() {
         this.sheetData.set(this.sheet).subscribe(
             () => {
                 console.log('success', this.sheet);
@@ -65,16 +61,18 @@ export class SheetComponent {
         );
     }
 
+    private addMember(name: string): void {
+        if (name.trim() === '') {
+            return;
+        }
+        let member = new Person(name);
+        this.sheet.addMember(member);
+        this.saveSheet();
+    }
+
     private removeMember(person: Person): void {
         this.sheet.removeMember(person);
-        this.sheetData.set(this.sheet).subscribe(
-            () => {
-                console.log('success');
-            },
-            () => {
-                console.log('error');
-            }
-        );
+        this.saveSheet();
     }
 
     private setTitleEditing(editing: Boolean) {
@@ -88,15 +86,15 @@ export class SheetComponent {
                 this.titleInput.nativeElement.focus();
             }, 0)
         } else {
-            this.sheetData.set(this.sheet).subscribe(
-                () => {
-                    console.log('success');
-                },
-                () => {
-                    console.log('error');
-                }
-            );
+            this.saveSheet();
         }
+    }
+
+    private newRecord(event) {
+        let record: Record = event.record;
+        console.log('new record:', record);
+        this.sheet.addRecord(record);
+        this.saveSheet();
     }
 
 }
