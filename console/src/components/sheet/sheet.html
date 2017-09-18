@@ -30,11 +30,10 @@
 </section>
 
 <!-- Control -->
-<control [members]="sheet?.members" (onRecordCreated)="newRecord($event)"></control>
+<control [members]="sheet?.members" (onRecordCreated)="addRecord($event)"></control>
 
-<section class="container records" *ngIf="sheet">
-    <record-list [records]="sheet.records"></record-list>
-</section>
+<!-- Records -->
+<record-list [records]="sheet?.records"></record-list>
 
 <section class="model">
     <!-- modal -->

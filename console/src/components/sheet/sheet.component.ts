@@ -90,7 +90,7 @@ export class SheetComponent {
         }
     }
 
-    private newRecord(event) {
+    private addRecord(event) {
         let record: Record = event.record;
         console.log('new record:', record);
         this.sheet.addRecord(record);

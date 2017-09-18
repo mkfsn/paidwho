@@ -1,3 +1,4 @@
+import './record-list.scss';
 import { Component, Input } from '@angular/core';
 
 import { Record } from '../../model/record';
@@ -16,6 +17,7 @@ interface IRecordGroup {
 export class RecordListComponent {
 
     @Input() records: Array<Record>;
+
     private recordGroup: Array<IRecordGroup>;
 
     constructor() {
@@ -24,7 +26,7 @@ export class RecordListComponent {
     }
 
     ngOnChanges(changesObj) {
-        if (changesObj.records) {
+        if (this.records && changesObj.records) {
             this.updateRecordGroup();
         }
     }
@@ -34,7 +36,7 @@ export class RecordListComponent {
 
         let dict = {};
         this.records.forEach((r: Record) => {
-            let dateString = r.date.getFullYear() + '/' + r.date.getMonth() + '/' + r.date.getDay();
+            let dateString = r.date.getFullYear() + '/' + (1 + r.date.getMonth()) + '/' + r.date.getDate();
             let date = new Date(dateString);
 
             let index: number;
@@ -46,6 +48,7 @@ export class RecordListComponent {
                     date: date,
                     records: []
                 });
+                dict[dateString] = index;
             }
             this.recordGroup[index].records.push(r);
         });

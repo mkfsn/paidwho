@@ -1,14 +1,22 @@
-<div *ngFor="let group of recordGroups">
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">{{ section.date | date:'yyyy-MM-dd' }}</h3>
-        </div>
-        <div class="panel-body">
-            <div *ngFor="let record of group.records">
-                <p>{{ record.title }}</p>
-                <p>{{ record.amount }}</p>
-                <p>{{ record.payer.name }}</p>
+<section class="records">
+    <div *ngFor="let group of recordGroup" class="record-group container">
+        <h3 class="group-title">{{ group.date | date:'yyyy-MM-dd' }}</h3>
+        <div *ngFor="let record of group.records" class="record-row clearfix">
+            <div class="record-left">
+                <i class="glyphicon glyphicon-triangle-right"></i>
+            </div>
+            <div class="record-info">
+                <p>
+                    {{ record.title }}
+                    <span class="record-tag">
+                        <span class="record-payer">{{ record.payer.name }}</span>
+                        <span class="badge">{{ record.amount }}</span>
+                    </span>
+                </p>
+            </div>
+            <div class="record-right">
+                <i class="glyphicon glyphicon-remove-sign"></i>
             </div>
         </div>
     </div>
-</div>
+</section>
