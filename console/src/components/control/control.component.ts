@@ -35,7 +35,7 @@ export class ControlComponent {
 
     private submit() {
         let details = this.selector.report();
-        console.log("submit:", details);
+        console.log('submit:', details);
         console.log('today:', this.today);
         console.log('payer:', this.payer);
         console.log('amount:', this.amount);
