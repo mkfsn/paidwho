@@ -8,7 +8,7 @@
                     </span>
                     <input type="date" class="form-control"
                            id="record-date" [ngModel]="today | date:'yyyy-MM-dd'"
-                           (change)="updateDate()"
+                           (ngModelChange)="updateDate($event)"
                            [ngModelOptions]="{standalone: true}"
                            [value]="today | date:'yyyy-MM-dd'">
                 </div>

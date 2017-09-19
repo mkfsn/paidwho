@@ -46,4 +46,8 @@ export class ControlComponent {
         this.onRecordCreated.emit({'record': record});
     }
 
+    private updateDate(date: Date) {
+        this.today = new Date(date);
+    }
+
 }
