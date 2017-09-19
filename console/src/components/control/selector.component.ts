@@ -43,10 +43,7 @@ export class SelectorComponent {
         if (this.members && this.membersLength !== this.members.length) {
             // check old selected and unselected
             if (this.selected.length === 0 && this.unselected.length === 0) {
-                this.selected = this.members.map((p: Person) => {
-                    return <IPerson>{person: p, expected: undefined};
-                });
-                this.unselected = [];
+                this.reset();
             } else {
                 let selected = [], unselected = [];
 
@@ -75,6 +72,15 @@ export class SelectorComponent {
                 this.unselected = unselected;
             }
             this.membersLength = this.members.length;
+        }
+    }
+
+    private reset() {
+        if (this.members) {
+            this.selected = this.members.map((p: Person) => {
+                return <IPerson>{person: p, expected: undefined};
+            });
+            this.unselected = [];
         }
     }
 

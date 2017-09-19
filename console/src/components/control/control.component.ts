@@ -25,8 +25,7 @@ export class ControlComponent {
     constructor() {
         // We don't assign 0 because we want the input box shows number only
         // when user has typed something.
-        this.amount = undefined;
-        this.today = new Date();
+        this.reset();
     }
 
     private updateTotal(event) {
@@ -44,6 +43,19 @@ export class ControlComponent {
         record.details = details;
 
         this.onRecordCreated.emit({'record': record});
+
+        // Clean up
+        this.reset();
+    }
+
+    private reset() {
+        this.today = new Date();
+        this.amount = undefined;
+        this.title = undefined;
+        this.payer = undefined;
+        if (this.selector) {
+            this.selector.reset();
+        }
     }
 
     private updateDate(date: Date) {
