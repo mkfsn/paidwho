@@ -1,22 +1,9 @@
 <section class="records">
     <div *ngFor="let group of recordGroups" class="record-group container">
         <h3 class="group-title">{{ group.date | date:'yyyy-MM-dd' }}</h3>
-        <div *ngFor="let record of group.records" class="record-row clearfix">
-            <div class="record-left">
-                <i class="glyphicon glyphicon-triangle-right"></i>
-            </div>
-            <div class="record-info">
-                <p>
-                    {{ record.title }}
-                    <span class="record-tag">
-                        <span class="record-payer">{{ record.payer.name }}</span>
-                        <span class="badge">{{ record.amount }}</span>
-                    </span>
-                </p>
-            </div>
-            <div class="record-right">
-                <i class="glyphicon glyphicon-remove-sign" (click)="removeRecord(record)"></i>
-            </div>
-        </div>
+        <record *ngFor="let record of group.records"
+                [record]="record"
+                (onRecordRemoved)="onRecordRemoved.emit($event)">
+        </record>
     </div>
 </section>

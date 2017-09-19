@@ -1,0 +1,18 @@
+<div class="record-row clearfix">
+    <div class="record-left">
+        <i class="glyphicon glyphicon-triangle-right"></i>
+    </div>
+    <div class="record-info">
+        <p>
+            {{ record.title }}
+            <span class="record-tag">
+                <span class="record-payer">{{ record.payer.name }}</span>
+                <span class="badge">{{ record.amount }}</span>
+            </span>
+        </p>
+    </div>
+    <div class="record-right">
+        <i class="glyphicon glyphicon-remove-sign" (click)="removeRecord(record)"></i>
+    </div>
+    <div class="record-details"></div>
+</div>

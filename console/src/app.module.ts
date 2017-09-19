@@ -16,6 +16,7 @@ import { ControlComponent } from './components/control/control.component';
 import { SelectorComponent } from './components/control/selector.component';
 import { SheetComponent } from './components/sheet/sheet.component';
 import { RecordListComponent } from './components/record/record-list.component';
+import { RecordComponent } from './components/record/record.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 // Service
@@ -34,6 +35,7 @@ import { SheetData } from './services/sheet-data';
         AppComponent,
         ControlComponent,
         RecordListComponent,
+        RecordComponent,
         SelectorComponent,
         SheetComponent,
         WelcomeComponent

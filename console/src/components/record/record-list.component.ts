@@ -74,12 +74,4 @@ export class RecordListComponent {
             return 0;
         });
     }
-
-    private removeRecord(record: Record) {
-        let res = confirm('Confirm to delete record');
-        if (!res) {
-            return;
-        }
-        this.onRecordRemoved.emit({'record': record});
-    }
 }
