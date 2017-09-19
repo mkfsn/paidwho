@@ -25,7 +25,6 @@ export class SheetComponent {
     @ViewChild('titleInput') private titleInput: ElementRef;
 
     constructor(private router: Router, private route: ActivatedRoute, private sheetData: SheetData) {
-
         this.getSheet();
         this.titleEditing = false;
     }
@@ -94,6 +93,13 @@ export class SheetComponent {
         let record: Record = event.record;
         console.log('new record:', record);
         this.sheet.addRecord(record);
+        this.saveSheet();
+    }
+
+    private removeRecord(event) {
+        let record: Record = event.record;
+        console.log('remove record:', record);
+        this.sheet.removeRecord(record);
         this.saveSheet();
     }
 

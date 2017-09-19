@@ -61,11 +61,27 @@ export class Sheet {
     }
 
     public addRecord(record: Record) {
+        if (!record) {
+            return;
+        }
         this.records.push(record);
     }
 
     public getRecords(): Array<Record> {
         return this.records;
+    }
+
+    public removeRecord(record: Record) {
+        if (!record) {
+            return;
+        }
+
+        let index = this.records.findIndex((r: Record) => r.id === record.id);
+        if (index === -1) {
+            return;
+        }
+
+        this.records.splice(index, 1);
     }
 
     public toJSON(): string {

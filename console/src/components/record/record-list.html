@@ -1,5 +1,5 @@
 <section class="records">
-    <div *ngFor="let group of recordGroup" class="record-group container">
+    <div *ngFor="let group of recordGroups" class="record-group container">
         <h3 class="group-title">{{ group.date | date:'yyyy-MM-dd' }}</h3>
         <div *ngFor="let record of group.records" class="record-row clearfix">
             <div class="record-left">
@@ -15,7 +15,7 @@
                 </p>
             </div>
             <div class="record-right">
-                <i class="glyphicon glyphicon-remove-sign"></i>
+                <i class="glyphicon glyphicon-remove-sign" (click)="removeRecord(record)"></i>
             </div>
         </div>
     </div>

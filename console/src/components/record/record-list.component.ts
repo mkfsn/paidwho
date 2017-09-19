@@ -1,5 +1,5 @@
 import './record-list.scss';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Record } from '../../model/record';
 
@@ -18,21 +18,33 @@ export class RecordListComponent {
 
     @Input() records: Array<Record>;
 
-    private recordGroup: Array<IRecordGroup>;
+    @Output() onRecordRemoved = new EventEmitter();
+
+    private recordGroups: Array<IRecordGroup>;
+    private recordsLength: number;
 
     constructor() {
         this.records = [];
-        this.recordGroup = [];
+        this.recordsLength = 0;
+        this.recordGroups = [];
     }
 
-    ngOnChanges(changesObj) {
-        if (this.records && changesObj.records) {
+    ngOnChanges(changes) {
+        // Do checking update of records(Input) in ngDoCheck since
+        // it's a array and is passing by reference
+    }
+
+    ngDoCheck() {
+        if (this.records && this.recordsLength !== this.records.length) {
+            // NOTE: I only check length of records since we only support
+            // adding and removing items in records
+            this.recordsLength = this.records.length;
             this.updateRecordGroup();
         }
     }
 
     private updateRecordGroup() {
-        this.recordGroup = [];
+        this.recordGroups = [];
 
         let dict = {};
         this.records.forEach((r: Record) => {
@@ -43,15 +55,31 @@ export class RecordListComponent {
             if (dateString in dict) {
                 index = dict[dateString];
             } else {
-                index = this.recordGroup.length;
-                this.recordGroup.push({
+                index = this.recordGroups.length;
+                this.recordGroups.push({
                     date: date,
                     records: []
                 });
                 dict[dateString] = index;
             }
-            this.recordGroup[index].records.push(r);
+            this.recordGroups[index].records.push(r);
+        });
+
+        this.recordGroups.sort((x, y) => {
+            if (y.date > x.date) {
+                return 1;
+            } else if (y.date < x.date) {
+                return -1;
+            }
+            return 0;
         });
     }
 
+    private removeRecord(record: Record) {
+        let res = confirm('Confirm to delete record');
+        if (!res) {
+            return;
+        }
+        this.onRecordRemoved.emit({'record': record});
+    }
 }

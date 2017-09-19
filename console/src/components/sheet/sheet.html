@@ -33,7 +33,7 @@
 <control [members]="sheet?.members" (onRecordCreated)="addRecord($event)"></control>
 
 <!-- Records -->
-<record-list [records]="sheet?.records"></record-list>
+<record-list [records]="sheet?.records" (onRecordRemoved)="removeRecord($event)"></record-list>
 
 <section class="model">
     <!-- modal -->
