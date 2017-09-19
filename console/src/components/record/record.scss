@@ -1,54 +1,69 @@
-.record-row {
-    display: flex;
-    border-top: 1px solid #ace89c;
-
-    .record-left {
+.record-container {
+    .record-header, .record-body {
         display: flex;
-        width: 15px;
-        margin-left: -10px;
-        i.glyphicon {
-            display: flex;
-            align-items: center;
-            &:hover {
-                cursor: pointer;
-            }
-        }
     }
 
-    .record-right {
-        display: flex;
-        width: 15px;
-        margin-right: -10px;
-        i.glyphicon {
+    .record-header {
+        border-top: 1px solid #c4e8af;
+
+        .record-left {
             display: flex;
-            align-items: center;
-            color: red;
-            &:hover {
-                cursor: pointer;
+            width: 15px;
+            margin-left: -10px;
+            i.glyphicon {
+                display: flex;
+                align-items: center;
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
-    }
 
-    .record-info {
-        display: inline-block;
-        width: 100%;
-        padding: 0 .5rem;
-
-        p {
-            margin: 10px 0;
+        .record-right {
+            display: flex;
+            width: 15px;
+            margin-right: -10px;
+            i.glyphicon {
+                display: flex;
+                align-items: center;
+                color: red;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
 
-        .record-tag {
-            background-color: lightblue;
-            padding: 3px;
+        .record-info {
             display: inline-block;
-            height: 28px;
-            border-radius: 5px;
-            line-height: 20px;
+            width: 100%;
+            padding: 0 .5rem;
 
-            .record-payer {
-                vertical-align: middle;
+            p {
+                margin: 10px 0;
             }
+
+            .record-tag {
+                background-color: lightblue;
+                padding: 3px;
+                display: inline-block;
+                height: 28px;
+                border-radius: 5px;
+                line-height: 20px;
+
+                .record-payer {
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    .record-body {
+
+        background-color: #f4fef4;
+        padding-top: 5px;
+
+        .record-details ul {
+            margin-bottom: 5px;
         }
     }
 }

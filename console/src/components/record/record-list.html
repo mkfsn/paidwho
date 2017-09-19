@@ -1,6 +1,6 @@
 <section class="records">
-    <div *ngFor="let group of recordGroups" class="record-group container">
-        <h3 class="group-title">{{ group.date | date:'yyyy-MM-dd' }}</h3>
+    <div *ngFor="let group of recordGroups" class="record-group">
+        <h3 class="group-title container">{{ group.date | date:'yyyy-MM-dd' }}</h3>
         <record *ngFor="let record of group.records"
                 [record]="record"
                 (onRecordRemoved)="onRecordRemoved.emit($event)">

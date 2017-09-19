@@ -1,18 +1,31 @@
-<div class="record-row clearfix">
-    <div class="record-left">
-        <i class="glyphicon glyphicon-triangle-right"></i>
+<div class="record-container">
+    <!-- header for brief information -->
+    <div class="record-header container">
+        <div class="record-left">
+            <i class="glyphicon" [ngClass]="{'glyphicon-triangle-right': !open, 'glyphicon-triangle-bottom': open}" (click)="open = !open"></i>
+        </div>
+        <div class="record-info">
+            <p>
+                {{ record.title }}
+                <span class="record-tag">
+                    <span class="record-payer">{{ record.payer.name }}</span>
+                    <span class="badge">{{ record.amount }}</span>
+                </span>
+            </p>
+        </div>
+        <div class="record-right">
+            <i class="glyphicon glyphicon-remove-sign" (click)="removeRecord(record)"></i>
+        </div>
     </div>
-    <div class="record-info">
-        <p>
-            {{ record.title }}
-            <span class="record-tag">
-                <span class="record-payer">{{ record.payer.name }}</span>
-                <span class="badge">{{ record.amount }}</span>
-            </span>
-        </p>
+    <!-- collapsed body -->
+    <div class="record-body clearfix" *ngIf="open">
+        <div class="record-details">
+            <ul>
+                <li *ngFor="let detail of record.details">
+                    <span>{{ detail.who.name }} - {{ detail.expected }}</span>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="record-right">
-        <i class="glyphicon glyphicon-remove-sign" (click)="removeRecord(record)"></i>
-    </div>
-    <div class="record-details"></div>
 </div>
+
