@@ -1,0 +1,5 @@
+console:
+    build: ./console
+    restart: always
+    ports: 
+        - 7001:7001

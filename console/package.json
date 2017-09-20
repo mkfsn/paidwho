@@ -34,6 +34,7 @@
     "bootstrap-loader": "2.1.0",
     "bootstrap-sass": "3.3.7",
     "css-loader": "0.26.1",
+    "express": "4.15.3",
     "file-loader": "0.10.0",
     "html-loader": "0.5.1",
     "live-server": "1.2.0",
