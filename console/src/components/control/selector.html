@@ -16,8 +16,10 @@
     <div class="people-body">
         <div class="record-people">
             <!-- selected -->
-            <div class="record-people-row" *ngFor="let s of selected; let i = index">
-                <input type="checkbox" tabindex="-1" checked="checked" (change)="deselect(s.person)" id="{{ 'record-people-' + i }}">
+            <div class="record-people-row selected" *ngFor="let s of selected; let i = index">
+                <input type="checkbox" tabindex="-1" checked="checked"
+                       (change)="deselect(s.person)"
+                       id="{{ 'record-people-selected-' + i }}">
                 <input type="number"
                        name="{{ 'person-expected-' + i }}"
                        [(ngModel)]="s.expected"
@@ -26,19 +28,23 @@
                        (change)="updateTotal()"
                        class="input-sm form-control record-people-amount"
                        placeholder="Amount">
-                <label for="{{ 'record-people-' + i }}">{{ s.person.name }}</label>
+                <label for="{{ 'record-people-selected-' + i }}">{{ s.person.name }}</label>
             </div>
             <!-- unselected -->
-            <div class="record-people-row" *ngFor="let s of unselected; let i = index">
-                <input type="checkbox" tabindex="-1" (change)="select(s.person)" id="{{ 'record-people-' + i }}">
+            <div class="record-people-row unselected" *ngFor="let s of unselected; let i = index">
+                <input type="checkbox" tabindex="-1"
+                       (change)="select(s.person)"
+                       id="{{ 'record-people-unselected-' + i }}">
                 <input type="number"
                        name="{{ 'person-expected-' + i }}"
                        [(ngModel)]="s.expected"
                        inputmode="numeric"
                        pattern="[0-9]*"
+                       tabindex="-1"
+                       disabled="disabled"
                        class="input-sm form-control record-people-amount"
                        placeholder="Amount">
-                <label for="{{ 'record-people-' + i }}">{{ s.person.name }}</label>
+                <label for="{{ 'record-people-unselected-' + i }}">{{ s.person.name }}</label>
             </div>
         </div>
     </div>

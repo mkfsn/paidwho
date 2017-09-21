@@ -2,6 +2,11 @@
 
     .record-people-row {
         margin-bottom: .5rem;
+        &.unselected {
+            opacity: 0.5;
+            box-shadow: lightgrey 0 0 5px 5px;
+            background: lightgray;
+        }
     }
 
     .record-people-amount {
