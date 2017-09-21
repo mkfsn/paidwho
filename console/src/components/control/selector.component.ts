@@ -43,7 +43,10 @@ export class SelectorComponent {
         if (this.members && this.membersLength !== this.members.length) {
             // check old selected and unselected
             if (this.selected.length === 0 && this.unselected.length === 0) {
-                this.reset();
+                this.selected = this.members.map((p: Person) => {
+                    return <IPerson>{person: p, expected: undefined};
+                });
+                this.unselected = [];
             } else {
                 let selected = [], unselected = [];
 
@@ -76,12 +79,8 @@ export class SelectorComponent {
     }
 
     private reset() {
-        if (this.members) {
-            this.selected = this.members.map((p: Person) => {
-                return <IPerson>{person: p, expected: undefined};
-            });
-            this.unselected = [];
-        }
+        this.selected.forEach((p: IPerson, i: number) => { this.selected[i].expected = undefined });
+        this.unselected.forEach((p: IPerson, i: number) => { this.unselected[i].expected = undefined });
     }
 
     private splitPaymentEqually() {
