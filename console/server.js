@@ -1,7 +1,9 @@
+var compression = require('compression');
 var express = require('express');
 var httpProxy = require('http-proxy');
 
 var app = express();
+app.use(compression());
 
 var path = __dirname;
 var port = 7001;
