@@ -13,6 +13,7 @@ function root(__path) {
 const config = {
     entry: {
         "vendor": "./src/vendor",
+        "style": "./src/style",
         "app": "./src/main"
     },
     output: {
@@ -33,10 +34,15 @@ const config = {
         rules: [
             {
                 test: /\.html$/,
-                loader: "html-loader"},
+                loader: "html-loader"
+            },
             {
                 test: /\.scss$/,
                 loaders: ["style-loader", "css-loader", "sass-loader"]
+            },
+            {
+                test: /\.css$/,
+                loaders: ["style-loader", "css-loader"]
             },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
