@@ -19,7 +19,7 @@ function requestForbidden(req, res) {
 app.use('/dist', express.static(path + '/dist'));
 
 app.get('/', requestHandler);
-app.get('/sheet', requestHandler);
+app.get('/sheet/*', requestHandler);
 
 app.get('/src/*', requestForbidden);
 app.get('/node_modules/*', requestForbidden);
